@@ -11,7 +11,7 @@ const points: { [K in Response]: number } = {
     Z: 3
 }
 
-const isWin = (prompt: Prompt, response: Response) => 
+const isWin = (prompt: Prompt, response: Response) =>
     (prompt === 'A' && response === 'Y') || (prompt === 'B' && response === 'Z') || (prompt === 'C' && response === 'X')
 
 const isDraw = (prompt: Prompt, response: Response) =>
@@ -28,7 +28,7 @@ export const partOne = async () => {
         if (isWin(prompt, response)) {
             score += 6
         }
-        
+
         if (isDraw(prompt, response)) {
             score += 3
         }
@@ -43,18 +43,63 @@ partOne().then((result) => console.log(`Part one: ${result}`))
 
 // Part two
 
-
 // X: loss
 // y: draw
 // z: win
 type Outcome = Response
 
-const getResponse = (prompt: Prompt, outcome: Outcome): number => {
-    if (outcome == 'X') {
-        return 0
+
+// Given a prompt and an outcome, figure out the correct response, returning its score
+export const getResponse = (prompt: Prompt, outcome: Outcome): number => {
+    let result = 0
+    
+    switch (outcome) {
+        case 'X': {
+            if (prompt === 'A') {
+                result = points['Z']
+            }
+
+            if (prompt === 'B') {
+                result = points['X']
+            }
+            if (prompt === 'C') {
+                result = points['Y']
+            }
+            break
+        }
+        case 'Y': {
+            result += 3
+
+            if (prompt === 'A') {
+                result += points['X']
+            }
+
+            if (prompt === 'B') {
+                result += points['Y']
+            }
+            if (prompt === 'C') {
+                result += points['Z']
+            }
+            break
+        }
+        case 'Z': {
+            result += 6
+
+            if (prompt === 'A') {
+                result += points['Y']
+            }
+    
+            if (prompt === 'B') {
+                result += points['Z']
+            }
+            if (prompt === 'C') {
+                result += points['X']
+            }
+            break
+        }
     }
 
-    return 0
+    return result
 }
 
 export const partTwo = async () => {
@@ -62,10 +107,9 @@ export const partTwo = async () => {
     let totalScore = 0;
 
     for (const line of data.toString().split(/[\n]/)) {
-        const [prompt, response] = line.split(' ') as [Prompt, Response]
-        let score = 0;
+        const [prompt, outcome] = line.split(' ') as [Prompt, Outcome]
 
-        totalScore += score + points[response]
+        totalScore += getResponse(prompt, outcome)
     }
 
     return totalScore
