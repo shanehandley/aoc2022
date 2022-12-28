@@ -13,7 +13,7 @@ describe('day 08', () => {
              */
             const lines = ['22222', '11111', '11111', '11111', '22222']
 
-            expect(d.extractTrees(lines, '1', 1, 1)).toStrictEqual({
+            expect(d.extractTrees(lines, 1, 1)).toStrictEqual({
                 north: [2],
                 east: [1],
                 south: [1, 1, 2],
@@ -31,11 +31,31 @@ describe('day 08', () => {
              */
             const lines = ['22222', '11111', '11111', '11111', '22222']
 
-            expect(d.extractTrees(lines, '1', 2, 1)).toStrictEqual({
+            expect(d.extractTrees(lines, 2, 1)).toStrictEqual({
                 north: [2, 1],
                 east: [1],
                 south: [1, 2],
                 west: [1, 1, 1]
+            })
+        })
+
+        it('extracting larger sets', () => {
+            const lines = [
+                '20011111042034112',
+                '00112330000312101',
+                '31121024123002430',
+                '31322014343240021',
+                '10233024313120200',
+                '12020020200441142', // 12020020_2_00441142
+                '13100024244112434',
+                '11414322444450442'
+            ]
+
+            expect(d.extractTrees(lines, 5, 8)).toStrictEqual({
+                north: [0, 0, 1, 3, 3],
+                east: [1, 2, 0, 2, 0, 0, 2, 0],
+                south: [2, 4],
+                west: [0, 0, 4, 4, 1, 1, 4, 2]
             })
         })
 
@@ -71,6 +91,30 @@ describe('day 08', () => {
             })
 
             await expect(d.process()).resolves.toEqual(16)
+        })
+
+        it('calculates for larger sets', async () => {
+            jest.spyOn(load, 'loadInput').mockImplementation(async () => {
+                /**
+                 * length = 17 = (34)
+                 * height = 8 (16)
+                 * 
+                 * exterior = 50
+                 * 
+                 * 20011111042034112
+                 * 00112330000312101 .010111000010000. = 5
+                 * 31121024123002430 .101000110000011. = 6 // 11
+                 * 31322014343240021 .010000111001001. = 6 // 17
+                 * 10233024313120200 .
+                 * 12020020200441142 .
+                 * 13100024244112434 .
+                 * 11414322444450442
+                 */
+
+                return Promise.resolve(Buffer.from('20011111042034112\n00112330000312101\n31121024123002430\n31322014343240021\n10233024313120200\n12020020200441142\n13100024244112434\n11414322444450442'))
+            })
+
+            await expect(d.process()).resolves.toEqual(78)
         })
 
         it('Calculates visibility of test data correctly', async () => {
