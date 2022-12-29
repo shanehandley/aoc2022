@@ -2,7 +2,7 @@ import * as load from './index'
 import * as d from './day08'
 
 describe('day 08', () => {
-    describe('Part 01', () => {
+    describe.skip('Part 01', () => {
         it('extracting rows with equal indices for x and y', () => {
             /**
              * 22222
@@ -72,7 +72,7 @@ describe('day 08', () => {
                 return Promise.resolve(Buffer.from('22222\n11111\n22222'))
             })
 
-            await expect(d.process()).resolves.toEqual(12)
+            await expect(d.partOne()).resolves.toEqual(12)
         })
 
         it('for no internally visible trees (5 x 5)', async () => {
@@ -90,7 +90,7 @@ describe('day 08', () => {
                 return Promise.resolve(Buffer.from('22222\n11111\n11111\n11111\n22222'))
             })
 
-            await expect(d.process()).resolves.toEqual(16)
+            await expect(d.partOne()).resolves.toEqual(16)
         })
 
         it('calculates for larger sets', async () => {
@@ -114,7 +114,7 @@ describe('day 08', () => {
                 return Promise.resolve(Buffer.from('20011111042034112\n00112330000312101\n31121024123002430\n31322014343240021\n10233024313120200\n12020020200441142\n13100024244112434\n11414322444450442'))
             })
 
-            await expect(d.process()).resolves.toEqual(78)
+            await expect(d.partOne()).resolves.toEqual(78)
         })
 
         it('Calculates visibility of test data correctly', async () => {
@@ -129,7 +129,37 @@ describe('day 08', () => {
                 return Promise.resolve(Buffer.from('30373\n25512\n65332\n33549\n35390'))
             })
 
-            await expect(d.process()).resolves.toEqual(21)
+            await expect(d.partOne()).resolves.toEqual(21)
+        })
+    })
+
+    describe('part 02', () => {
+        fit('calculates a simple case', async () => {
+            jest.spyOn(load, 'loadInput').mockImplementation(async () => {
+                /**
+                 * 11111
+                 * 22222
+                 * 11111
+                 */
+                return Promise.resolve(Buffer.from('11111\n22222\n11111'))
+            })
+
+            await expect(d.partTwo()).resolves.toEqual(1)
+        })
+
+        it('calculates the example correctly', async () => {
+            jest.spyOn(load, 'loadInput').mockImplementation(async () => {
+                /**
+                 * 30373
+                 * 25512
+                 * 65332
+                 * 33549
+                 * 35390
+                 */
+                return Promise.resolve(Buffer.from('30373\n25512\n65332\n33549\n35390'))
+            })
+
+            await expect(d.partTwo()).resolves.toEqual(8)
         })
     })
 })
