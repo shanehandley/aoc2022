@@ -2,7 +2,7 @@ import { inspect } from 'util'
 import { loadInput } from './index'
 
 const process = async () => {
-    const data = await loadInput('07')
+    const data = await loadInput('11')
     const lines = data.toString().split(/[\n]/)
 
     const result = ''
