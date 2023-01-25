@@ -6,7 +6,7 @@ void main() {
     expect(await partone(), 7766);
   });
 
-  test('partone', () async {
+  test('parttwo', () async {
     expect(await parttwo(), 2415);
   });
 }
