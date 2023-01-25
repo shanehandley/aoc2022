@@ -1,0 +1,6 @@
+import 'package:aoc2022/day__DAY__.dart' as day__DAY__;
+
+void main(List<String> arguments) async {
+  print("Part one: ${await day__DAY__.partone()}");
+  print("Part two: ${await day__DAY__.parttwo()}");
+}

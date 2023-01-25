@@ -1,14 +1,14 @@
 import 'dart:async';
-import 'package:day01/utils.dart';
+import 'package:aoc2022/utils.dart';
 
 Future<List<int>> sumGroups() async {
-  String data = await load("01");
+  String data = await loadInput("01");
 
   List<int> groups = data
       .split('\n\n')
       .map((e) => e
           .split('\n')
-          .map((e) => int.parse(e))
+          .map(int.parse)
           .reduce((prev, element) => prev + element))
       .toList();
 

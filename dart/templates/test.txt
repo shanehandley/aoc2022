@@ -1,12 +1,12 @@
-import 'package:day01/day01.dart';
+import 'package:aoc2022/day__DAY__.dart';
 import 'package:test/test.dart';
 
 void main() {
   test('partone', () async {
-    expect(await partone(), 69693);
+    expect(await partone(), 0);
   });
 
   test('partone', () async {
-    expect(await parttwo(), 200945);
+    expect(await parttwo(), 0);
   });
 }

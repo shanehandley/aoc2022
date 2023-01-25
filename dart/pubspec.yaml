@@ -1,4 +1,4 @@
-name: day01
+name: aoc2022
 description: A sample command-line application.
 version: 1.0.0
 # homepage: https://www.example.com
@@ -7,6 +7,7 @@ environment:
   sdk: '>=2.18.6 <3.0.0'
 
 dependencies:
+  args: ^2.3.2
   path: ^1.8.0
 
 dev_dependencies:
