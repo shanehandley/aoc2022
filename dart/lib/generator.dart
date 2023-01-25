@@ -55,7 +55,7 @@ class Generator {
 
     // Templated file
     var promises = TemplateType.values.map((template) async {
-      var libTemplate = File(_templatePath(_day, TemplateType.lib));
+      var libTemplate = File(_templatePath(_day, template));
       var lines = await libTemplate.readAsString();
 
       await File(_outputPath(template))
